@@ -86,6 +86,13 @@ npm run verify -- --modules "C:\Users\<you>\.dsh\profiles\node_modules"
 # 等价的直接调用：node verify.mjs --modules "..."
 ```
 
+> **macOS 桌面版避坑说明**：  
+> 桌面版的核心依赖（如 `@deepseek-ai/dsh-system-prompt`）默认打包在 `app.asar` 虚拟压缩包内，外部 `~/.dsh/profiles/node_modules` 可能是死链或缺少依赖，且普通系统 Node.js 无法直接解析 asar 虚拟路径。  
+> 请使用 DSH 自带的运行时和内置模块路径进行验证：  
+> ```bash
+> ELECTRON_RUN_AS_NODE=1 "/Applications/DeepSeek Harness.app/Contents/MacOS/DeepSeek Harness" verify.mjs --modules "/Applications/DeepSeek Harness.app/Contents/Resources/app.asar/dsh/node_modules"
+> ```
+
 期望输出里能看到：
 
 ```
